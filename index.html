@@ -253,58 +253,9 @@
             <h2>Xác Nhận Tham Gia</h2>
             <p>Vui lòng điền thông tin để chúng tôi chuẩn bị chu đáo hơn</p>
 
-            <form id="confirmForm">
-                <input type="text" name="fullName" placeholder="Họ và tên" required />
+            <iframe src="https://forms.gle/13iW8ZDmFoEJEWm36" width="100%" height="900" frameborder="0">
+            </iframe>
 
-                <input type="tel" name="phone" placeholder="Số điện thoại" required />
-
-                <select name="attendance" required>
-                    <option value="">Bạn có tham gia không?</option>
-                    <option value="yes">✅ Có, chắc chắn tham gia</option>
-                    <option value="no">❌ Rất tiếc, không tham gia</option>
-                </select>
-
-                <button type="submit">Gửi Xác Nhận</button>
-            </form>
-
-            <script>
-                const form = document.getElementById("confirmForm");
-
-                form.addEventListener("submit", async (e) => {
-                    e.preventDefault();
-
-                    const formData = new FormData(form);
-
-                    const payload = {
-                        fullName: formData.get("fullName"),
-                        phone: formData.get("phone"),
-                        attendance: formData.get("attendance")
-                    };
-
-                    try {
-                        const res = await fetch("http://localhost:3000/api/confirm", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify(payload)
-                        });
-
-                        const data = await res.json();
-
-                        if (!res.ok) {
-                            throw new Error(data.message || "Gửi thất bại");
-                        }
-
-                        alert("🎉 Gửi xác nhận thành công!");
-                        form.reset();
-
-                    } catch (error) {
-                        console.error(error);
-                        alert("❌ Có lỗi xảy ra, vui lòng thử lại");
-                    }
-                });
-            </script>
 
         </div>
     </section>

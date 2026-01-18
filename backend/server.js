@@ -34,6 +34,6 @@ app.post("/api/confirm", async (req, res) => {
     }
 });
 
-app.listen(3000, () => {
+app.listen(8888, () => {
     console.log("🚀 Server chạy tại http://localhost:3000");
 });

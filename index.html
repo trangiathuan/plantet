@@ -21,47 +21,47 @@
             font-family: 'Inter', sans-serif;
             background: linear-gradient(180deg, #8b0000, #b11226);
             color: #fff;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* ---------- HERO ---------- */
         .hero {
-            min-height: 100vh;
+            min-height: 100svh;
             background:
-                linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .7)),
+                linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .75)),
                 url("https://res.cloudinary.com/dteuqunrm/image/upload/v1768757866/Black_Gradient_Technology_YouTube_Banner_wuuagc.png") center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 40px 20px;
+            padding: 32px 16px;
         }
 
         .hero-content {
-            max-width: 900px;
+            max-width: 680px;
         }
 
         .badge {
             display: inline-block;
             background: #facc15;
             color: #7c2d12;
-            padding: 8px 18px;
+            padding: 6px 14px;
             border-radius: 999px;
             font-weight: 600;
-            margin-bottom: 24px;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
         }
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            margin-bottom: 16px;
-            letter-spacing: 1px;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            margin-bottom: 14px;
+            line-height: 1.2;
         }
 
         .subtitle {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 3.5vw, 1.15rem);
             opacity: 0.95;
-            max-width: 650px;
-            margin: 0 auto 40px;
             line-height: 1.6;
         }
 
@@ -69,19 +69,18 @@
         .info {
             background: #fff;
             color: #1f2937;
-            border-radius: 24px;
-            padding: 50px;
-            max-width: 1000px;
-            margin: -120px auto 60px;
+            border-radius: 20px;
+            padding: 28px 18px;
+            max-width: 1100px;
+            margin: -90px auto 50px;
             box-shadow: 0 30px 60px rgba(0, 0, 0, .25);
         }
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            /* 4 item trên 1 dòng */
-            gap: 24px;
-            padding-bottom: 15px;
+            grid-template-columns: 1fr;
+            gap: 18px;
+            margin-bottom: 28px;
         }
 
         .info-item {
@@ -90,102 +89,120 @@
 
         .info-item h3 {
             color: #b11226;
-            font-size: 1.1rem;
-            margin-bottom: 10px;
+            font-size: 1rem;
+            margin-bottom: 6px;
         }
 
         .info-item p {
             font-weight: 500;
+            font-size: 0.95rem;
         }
 
         /* ---------- GALLERY ---------- */
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 50px;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 36px;
         }
 
         .gallery img {
             width: 100%;
-            height: 280px;
+            height: 160px;
             object-fit: cover;
-            border-radius: 14px;
-            transition: transform .4s ease;
-        }
-
-        .gallery img:hover {
-            transform: scale(1.05);
+            border-radius: 12px;
         }
 
         /* ---------- FORM ---------- */
         .form-box {
             background: linear-gradient(135deg, #b11226, #7f1d1d);
-            border-radius: 20px;
-            padding: 40px;
+            border-radius: 18px;
+            padding: 26px 18px;
             color: #fff;
         }
 
         .form-box h2 {
             font-family: 'Playfair Display', serif;
             text-align: center;
-            margin-bottom: 10px;
-            font-size: 2.2rem;
+            margin-bottom: 6px;
+            font-size: clamp(1.6rem, 4vw, 2rem);
         }
 
         .form-box p {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 22px;
             opacity: 0.9;
+            font-size: 0.95rem;
         }
 
         form {
             display: grid;
-            gap: 18px;
+            gap: 14px;
         }
 
         input,
         select {
-            padding: 14px 16px;
-            border-radius: 10px;
+            padding: 14px 14px;
+            border-radius: 12px;
             border: none;
             font-size: 1rem;
+            height: 48px;
         }
 
         button {
-            padding: 16px;
-            border-radius: 12px;
+            padding: 14px;
+            border-radius: 14px;
             border: none;
             background: #facc15;
             color: #7c2d12;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             cursor: pointer;
-            transition: all .3s ease;
+            transition: transform .2s ease, background .2s ease;
         }
 
-        button:hover {
-            background: #fde047;
-            transform: translateY(-2px);
+        button:active {
+            transform: scale(0.97);
         }
 
         footer {
             text-align: center;
-            padding: 30px 20px;
-            font-size: .9rem;
+            padding: 28px 16px;
+            font-size: 0.85rem;
             opacity: .85;
         }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.4rem;
+        /* ---------- TABLET ---------- */
+        @media (min-width: 640px) {
+            .info {
+                padding: 40px 32px;
             }
 
-            .info {
-                padding: 30px 20px;
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery img {
+                height: 220px;
+            }
+        }
+
+        /* ---------- DESKTOP ---------- */
+        @media (min-width: 1024px) {
+            .info-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .gallery {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .gallery img {
+                height: 260px;
             }
         }
     </style>
+
 </head>
 
 <body>

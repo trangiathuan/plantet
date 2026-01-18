@@ -143,6 +143,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 12px;
             margin-bottom: 36px;
+            cursor: pointer;
         }
 
         .gallery img {
@@ -150,6 +151,72 @@
             height: 160px;
             object-fit: cover;
             border-radius: 12px;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s ease;
+        }
+
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 85%;
+            border-radius: 12px;
+            object-fit: contain;
+        }
+
+        /* Navigation buttons */
+        .lightbox .nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 42px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 16px;
+            opacity: 0.85;
+        }
+
+        .lightbox .prev {
+            left: 10px;
+        }
+
+        .lightbox .next {
+            right: 10px;
+        }
+
+        .lightbox .close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 28px;
+            color: white;
+            cursor: pointer;
+            opacity: 0.8;
+        }
+
+        /* Mobile-friendly */
+        @media (max-width: 600px) {
+            .lightbox .nav {
+                font-size: 34px;
+            }
         }
 
         /* ---------- FORM ---------- */
@@ -282,13 +349,19 @@
         <!-- GALLERY -->
         <div class="gallery">
             <img src="https://res.cloudinary.com/dteuqunrm/image/upload/v1768767690/4_v5uzrx.jpg" />
-
             <img src="https://res.cloudinary.com/dteuqunrm/image/upload/v1768767691/22_zggqng.jpg" />
             <img src="https://res.cloudinary.com/dteuqunrm/image/upload/v1768767728/3_z0zuf6.jpg" />
-
             <img src="https://res.cloudinary.com/dteuqunrm/image/upload/v1768767692/5_ybujxo.jpg" />
-
         </div>
+
+        <!-- LIGHTBOX -->
+        <div class="lightbox" id="lightbox">
+            <button class="nav prev">❮</button>
+            <img id="lightboxImg" />
+            <button class="nav next">❯</button>
+            <span class="close">✕</span>
+        </div>
+
 
 
         <!-- FORM -->
@@ -314,5 +387,58 @@
     </footer>
 
 </body>
+
+<script>
+    const images = document.querySelectorAll(".gallery img");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const prevBtn = document.querySelector(".prev");
+    const nextBtn = document.querySelector(".next");
+    const closeBtn = document.querySelector(".close");
+
+    let currentIndex = 0;
+
+    function showImage(index) {
+        currentIndex = (index + images.length) % images.length;
+        lightboxImg.src = images[currentIndex].src;
+        lightbox.classList.add("active");
+    }
+
+    images.forEach((img, index) => {
+        img.addEventListener("click", () => showImage(index));
+    });
+
+    prevBtn.onclick = () => showImage(currentIndex - 1);
+    nextBtn.onclick = () => showImage(currentIndex + 1);
+
+    closeBtn.onclick = () => lightbox.classList.remove("active");
+
+    lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) {
+            lightbox.classList.remove("active");
+        }
+    });
+
+    document.addEventListener("keydown", (e) => {
+        if (!lightbox.classList.contains("active")) return;
+        if (e.key === "ArrowLeft") showImage(currentIndex - 1);
+        if (e.key === "ArrowRight") showImage(currentIndex + 1);
+        if (e.key === "Escape") lightbox.classList.remove("active");
+    });
+
+    /* Swipe support for mobile */
+    let startX = 0;
+
+    lightboxImg.addEventListener("touchstart", e => {
+        startX = e.touches[0].clientX;
+    });
+
+    lightboxImg.addEventListener("touchend", e => {
+        const endX = e.changedTouches[0].clientX;
+        if (startX - endX > 50) showImage(currentIndex + 1);
+        if (endX - startX > 50) showImage(currentIndex - 1);
+    });
+</script>
+
 
 </html>

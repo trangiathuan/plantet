@@ -26,16 +26,30 @@
 
         /* ---------- HERO ---------- */
         .hero {
-            min-height: 100svh;
+            width: 100vw;
+            /* luôn full chiều ngang viewport */
+            min-height: 100vh;
+            /* KHÔNG dùng 250vh */
+
             background:
-                linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .75)),
-                url("https://res.cloudinary.com/dteuqunrm/image/upload/v1768757866/Black_Gradient_Technology_YouTube_Banner_wuuagc.png") center/cover;
+                linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.75)),
+                url("https://res.cloudinary.com/dteuqunrm/image/upload/v1768766031/Black_and_White_Bold_Coming_Soon_Poster_jejp0b.jpg");
+
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            /* quan trọng nhất */
+
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
+
             padding: 32px 16px;
+            overflow-x: hidden;
+            /* chống tràn ngang */
         }
+
 
         .hero-content {
             max-width: 680px;
